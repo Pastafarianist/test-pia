@@ -3,7 +3,7 @@ import socket
 from collections import defaultdict
 
 def resolve(domain):
-    return [v[4][0] for v in socket.getaddrinfo(domain, None)]
+    return socket.gethostbyname_ex(domain)[2]
 
 def test_reachability(ips):
     processes = [
