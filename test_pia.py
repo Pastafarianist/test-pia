@@ -38,14 +38,16 @@ def measure_ping(ips):
 
 def main():
     regions = [
-        'ae', 'au-melbourne', 'au-sydney', 'austria', 'belgium', 'brazil',
-        'ca-montreal', 'ca-toronto', 'ca-vancouver', 'czech', 'de-berlin',
-        'de-frankfurt', 'denmark', 'fi', 'france', 'hk', 'hungary', 'in', 'ireland',
-        'israel', 'italy', 'japan', 'lu', 'mexico', 'nl', 'no', 'nz', 'poland', 'ro', 'sg',
-        'spain', 'sweden', 'swiss', 'turkey', 'uk-london', 'uk-manchester',
-        'uk-southampton', 'us-atlanta', 'us-california', 'us-chicago', 'us-denver',
-        'us-east', 'us-florida', 'us-houston', 'us-lasvegas', 'us-newyorkcity',
-        'us-seattle', 'us-siliconvalley', 'us-texas', 'us-washingtondc', 'us-west', 'za'
+        'ae', 'albania', 'ar', 'au-melbourne', 'au-perth', 'au-sydney',
+        'austria', 'ba', 'belgium', 'bg', 'ca-montreal', 'ca-ontario',
+        'ca-toronto', 'ca-vancouver', 'czech', 'de-berlin', 'de-frankfurt',
+        'denmark', 'ee', 'fi', 'france', 'gr', 'hungary', 'in', 'ireland',
+        'is', 'israel', 'italy', 'jp', 'lt', 'lu', 'lv', 'md', 'mk', 'nl', 'no',
+        'nz', 'poland', 'pt', 'ro', 'rs', 'sg', 'sk', 'spain', 'sweden',
+        'swiss', 'tr', 'ua', 'uk-london', 'uk-manchester', 'uk-southampton',
+        'us-atlanta', 'us-california', 'us-chicago', 'us-dal', 'us-denver',
+        'us-east', 'us-florida', 'us-houston', 'us-lasvegas', 'us-nyc',
+        'us-sea', 'us-siliconvalley', 'us-washingtondc', 'us-west', 'za',
     ]
     pia_domains = [region + '.privateinternetaccess.com' for region in regions]
 
