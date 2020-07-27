@@ -4,11 +4,12 @@ import socket
 import subprocess
 
 import joblib
-import tqdm
 
 
 def resolve(domain):
-    return socket.gethostbyname_ex(domain)[2]
+    ips = socket.gethostbyname_ex(domain)[2]
+    ips.sort(key=lambda ip: [int(v) for v in ip.split('.')])
+    return ips
 
 
 def parse_ping_output(stdout):
@@ -50,15 +51,15 @@ def main():
     all_ips = []
 
     print('Resolving domain names to IPs...')
-    for domain in tqdm.tqdm(pia_domains):
-        ips = resolve(domain)
-        ips.sort(key=lambda ip: [int(v) for v in ip.split('.')])
-        domain2ips[domain] = ips
-        all_ips.extend(ips)
+    domain2ips = dict(zip(pia_domains, joblib.Parallel(n_jobs=min(len(pia_domains), 128), verbose=10)(
+        joblib.delayed(resolve)(domain) for domain in pia_domains
+    )))
     print(f'Done, total: {len(all_ips)} IPs.')
 
-    print('Pinging all IPs in 64 threads...')
-    ip2stats = dict(zip(all_ips, joblib.Parallel(n_jobs=64, prefer='threads', verbose=10)(
+    all_ips = [ip for ips in domain2ips.values() for ip in ips]
+
+    print('Pinging all IPs in 1024 threads...')
+    ip2stats = dict(zip(all_ips, joblib.Parallel(n_jobs=min(len(all_ips), 1024), prefer='threads', verbose=10)(
         joblib.delayed(measure_ping)(ip) for ip in all_ips
     )))
 
