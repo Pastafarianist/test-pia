@@ -1,7 +1,6 @@
 Requirements:
 
 * Python 3.6+
-* tqdm
 * joblib
 
 Usage:
